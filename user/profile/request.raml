@@ -1,0 +1,18 @@
+application/json:
+  example: |
+    {
+      //Идентификатор пользователя: string, required
+      "id": "BF4585465460D",
+      //Идентификатор города: number, required
+      "id_city": 3,
+      //Цветовая схема: 1 - Красная, 2 - Зеленая: number, required
+      "color_theme": 1,
+      //Разрешить получать уведомления: true - разрешить, false - нет: bool, required
+      "push": true,
+      //Разрешить вибрацию: true - разрешить, false - нет: bool, required
+      "vibration": true,
+      //Разрешить звук: true - разрешить, false - нет: bool, required
+      "sound": false,
+      //Разрешить геолокацию: true - разрешить, false - нет: bool, required
+      "access_geo": true
+    }

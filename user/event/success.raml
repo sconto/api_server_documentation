@@ -1,0 +1,64 @@
+description: Успешное выполнение запроса.
+body:
+  application/json:
+    example: |
+      {
+        "response": {
+            //Акция: object
+            "event": {
+              //Идентификатор владельца (клиента) акции: string
+              "id_client": "DEfsdfsxfbnbgfn56gh",
+              //Имя клиента: string,
+              "name_client": "Автомир",
+              //URL картинки клиента: string
+              "img_client": "http://www.example.com/clients/client.png",
+              //Количество акций у клиента: number
+              count_events: 4,
+              //Наименование акции: string
+              "name": "Акция 1",
+              //Описание акции: string
+              "description": "Описание",
+              //Текущая цена: number
+              "current_price": 4544,
+              //Копейки текущей цены: number,
+              "current_price_dime": 10,
+              //Старая цена: number
+              "old_price": 5621,
+              //Копейки старой цены: number,
+              "old_price_dime": 10,
+              //Скидка: number
+              "discount": 25,
+              //Время начала акции: date
+              "data_start": "...",
+              //Время конца акции: date
+              "data_finish": "...",
+              //Точки действия акции: array
+              "places": [
+                {
+                  //Идентификатор точки: string
+                  "id": "sdfdsSDFS557",
+                  //Имя точки: string
+                  "name": "Точка 1",
+                  //Долгота точки: number
+                  "longitude": 55.12,
+                  //Широта точки: number
+                  "latitude": 444.21,
+                  //Номер телефона: string,
+                  "phone": "+7 922 667 6666",
+                  //График работы: string,
+                  "time": "пн. - пт. с 10-00 до 20-00"
+                }
+              ],
+              //URL адрес главной картинки акции: string
+              "img": "http://example.com/img_event.jpg",
+              //URL адреса дополнительных картинок, не включая главную: array
+              "images": ["http://example.com/img_event2.jpg", "http://example.com/img_event3.jpg"],
+              //Условия проведения акции: string
+              "rights": "Условия проведения акции 1",
+              //Условия лайка акции пользователем: true - акция лайкнута, false - акция не лайкнута: bool
+              "like": true,
+              //Ознакамливался ли пользователь с условиями акции: true - пользователь уже ознакамливался с условиями акции, false - нет: bool
+              "isAccess": true,
+            }
+        }
+      }

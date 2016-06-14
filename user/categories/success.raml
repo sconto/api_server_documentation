@@ -1,0 +1,28 @@
+description: Успешное выполнение запроса.
+body:
+  application/json:
+    example: |
+      {
+        "response": {
+            //Список категорий: array
+            "categories": [
+                //Идентификатор категории: number
+                "id_category": 3,
+                //Имя категории: string
+                "name": "Бытовая техника",
+                //URL адрес иконки категории: string
+                "img": "http://example.com/icon_category.png",
+                //Список подкатегорий: array
+                "sub_categories": [
+                  {
+                    //Идентификатор подкатегории: number
+                    "id": 3,
+                    //Имя подкатегории: string
+                    "name": "Холодильники",
+                    //URL адрес иконки подкатегории: string
+                    "img": "http://example.com/icon_sub_category.png",
+                  }
+                ]
+            ]
+        }
+      }

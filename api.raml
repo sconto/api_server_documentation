@@ -1,0 +1,239 @@
+#%RAML 0.8
+title: Пользовательский API сервера города.
+version: v1.8.0
+documentation:
+ - title: Документация пользовательского API сервера города.
+   content: |
+     Документация пользовательского API сервера города.
+baseUri: /
+
+/user:
+  description: API пользователя (мобильное приложение).
+  /find:
+    post:
+      description: |
+        Поиск пользователя (или создание нового) по запрошенному идентификатору устройства.
+        Возвращается информация о профиле пользователя, лента пользователя и информации о категория/подкатегориях.
+      body: !include user/find/request.raml
+      responses:
+        200: !include user/find/success.raml
+        404: !include error/error.raml
+  /profile:
+    post:
+      description: |
+        Сохранение настроек пользователя
+      body: !include user/profile/request.raml
+      responses:
+        200: !include user/profile/success.raml
+        404: !include error/error.raml
+  /categories:
+    post:
+      description: |
+        Получение категорий и подкатегорий, отсортированных по рейтингу.
+      body: !include user/categories/request.raml
+      responses:
+        200: !include user/categories/success.raml
+        404: !include error/error.raml
+  /category:
+    /click:
+      post:
+        description: |
+          Совершение клика по категории, повышение рейтинга категории.
+        body: !include user/category/click/request.raml
+        responses:
+          200: !include user/category/click/success.raml
+          404: !include error/error.raml
+  /sub_category:
+    post:
+      description: |
+        Получение определенного количества акций определенной сортировки запрашиваемой подкатегории.
+      body: !include user/sub_category/request.raml
+      responses:
+        200: !include user/sub_category/success.raml
+        404: !include error/error.raml
+    /clients:
+      post:
+        description: |
+          Получение определенного количества клиентов запрашиваемой подкатегории.
+        body: !include user/sub_category/clients/request.raml
+        responses:
+          200: !include user/sub_category/clients/success.raml
+          404: !include error/error.raml
+    /click:
+      post:
+        description: |
+          Совершение клика по подкатегории, повышение рейтинга подкатегории.
+        body: !include user/sub_category/click/request.raml
+        responses:
+          200: !include user/sub_category/click/success.raml
+          404: !include error/error.raml
+
+  /lenta:
+    post:
+      description: |
+        Получение ленты (списка акций клиентов, на которых подписан пользователь) определенной сортировки.
+      body: !include user/lenta/request.raml
+      responses:
+        200: !include user/lenta/success.raml
+        404: !include error/error.raml
+  /event:
+    post:
+      description: |
+        Получение информации об акции.
+      body: !include user/event/request.raml
+      responses:
+        200: !include user/event/success.raml
+        404: !include error/error.raml
+    /like:
+      post:
+        description: |
+          Лайк/дизлайк акции.
+        body: !include user/event/like/request.raml
+        responses:
+          200: !include user/event/like/success.raml
+          404: !include error/error.raml
+  /clients:
+    post:
+      description: |
+        Получение всех клиентов города.
+      body: !include user/clients/request.raml
+      responses:
+        200: !include user/clients/success.raml
+        404: !include error/error.raml
+  /client:
+    post:
+      description: |
+        Получение информации о клиенте.
+      body: !include user/client/request.raml
+      responses:
+        200: !include user/client/success.raml
+        404: !include error/error.raml
+    /events:
+      post:
+        description: |
+          Получение определенного количества акций клиента определенной сортировки.
+        body: !include user/client/events/request.raml
+        responses:
+          200: !include user/client/events/success.raml
+          404: !include error/error.raml
+  /subscribe:
+    post:
+      description: |
+        Подписка/отписка на клиента.
+      body: !include user/subscribe/request.raml
+      responses:
+        200: !include user/subscribe/success.raml
+        404: !include error/error.raml
+    /clients:
+      post:
+        description: |
+          Получение клиентов, на которых подписан пользователь.
+        body: !include user/subscribe/clients/request.raml
+        responses:
+          200: !include user/subscribe/clients/success.raml
+          404: !include error/error.raml
+  /dream:
+    post:
+      description: |
+        Получение понравившихся акций, отсортированных по дате, включая неактивные.
+      body: !include user/dream/request.raml
+      responses:
+        200: !include user/dream/success.raml
+        404: !include error/error.raml
+  /hits:
+    post:
+      description: |
+        Получение хитов: какое-то количество акций, отсортированных по убыванию количества просмотров. Максимальное число акций равняется 50.
+      body: !include user/hits/request.raml
+      responses:
+        200: !include user/hits/success.raml
+        404: !include error/error.raml
+  /fire_events:
+    post:
+      description: |
+        Получение горящих акций: акции, срок которых истекает завтра (послезавтра).
+      body: !include user/fire_events/request.raml
+      responses:
+        200: !include user/fire_events/success.raml
+        404: !include error/error.raml
+  /carousel:
+    post:
+      description: |
+        Получение акций, находящихся в карусеел.
+      body: !include user/carousel/request.raml
+      responses:
+        200: !include user/carousel/success.raml
+        404: !include error/error.raml
+    /click:
+      post:
+        description: |
+          Отработка клика по акции, находящейся в каруселе.
+        body: !include user/carousel/click/request.raml
+        responses:
+          200: !include user/carousel/click/success.raml
+          404: !include error/error.raml
+  /push:
+    /click:
+      post:
+        description: |
+          Отработка клика по акции при переходе по push-уведомлению.
+        body: !include user/push/click/request.raml
+        responses:
+          200: !include user/push/click/success.raml
+          404: !include error/error.raml
+  /version:
+    post:
+      description: |
+        Определение версии приложения у пользователя.
+      body: !include user/version/request.raml
+      responses:
+        200: !include user/version/success.raml
+        404: !include error/error.raml
+  /report:
+    post:
+      description: |
+        Отправка оценки приложения пользователем.
+      body: !include user/report/request.raml
+      responses:
+        200: !include user/report/success.raml
+        404: !include error/error.raml
+  /feedback:
+    post:
+      description: |
+        Отправка обратной связи пользователем.
+      body: !include user/feedback/request.raml
+      responses:
+        200: !include user/feedback/success.raml
+        404: !include error/error.raml
+  /search:
+    post:
+      description: |
+        Поиск акций по ключевой фразе.
+      body: !include user/search/request.raml
+      responses:
+        200: !include user/search/success.raml
+        404: !include error/error.raml
+  /access_event:
+    post:
+      description: |
+        Отправка ознакомления пользователя с условиями проведения акции.
+      body: !include user/access_event/request.raml
+      responses:
+        200: !include user/access_event/success.raml
+        404: !include error/error.raml
+  /update_category:
+    post:
+      description: |
+        Проверка на условие обновления категорий.
+      body: !include user/update_category/request.raml
+      responses:
+        200: !include user/update_category/success.raml
+        404: !include error/error.raml
+  /token:
+    post:
+      description: |
+        Обновление токена.
+      body: !include user/token/request.raml
+      responses:
+        200: !include user/token/success.raml
+        404: !include error/error.raml

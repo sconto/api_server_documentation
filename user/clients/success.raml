@@ -1,0 +1,23 @@
+description: Успешное выполнение запроса.
+body:
+  application/json:
+    example: |
+      {
+        "response": {
+          //Все клиенты города, отсортированные по имени: array
+          "clients": [
+            {
+              //Идентификатор клиента: string
+              "id": "GFGDF64A54f",
+              //Имя клиента: string
+              "name": "Магазин 1",
+              //URL картинка клиента: string
+              "img": "http://example.com/client.jpg",
+              //Количество акций у клиента: number
+              "count_events": 4,
+              //Подписан ли пользователь на данного клиента: true - подписан, false - нет: bool
+              "isSubscribe": true
+            }
+          ]
+        }
+      }

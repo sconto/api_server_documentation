@@ -1,0 +1,1147 @@
+<!DOCTYPE HTML><html><head><title>Пользовательский API сервера города. API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/kevinrenskers/raml2html 2.2.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.1/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+
+        // open modal on hashes like #_action_get
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1); //strip #
+          var element = $('#' + anchor_id);
+
+          // do we have such element + is it a modal?  --> show it
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+
+        // execute hashchange on first page load
+        $(window).trigger('hashchange');
+
+        // remove url fragment on modal hide
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>Пользовательский API сервера города. API documentation <small>version v1.8.0</small></h1><p>/</p><h3 id="-------------------------------API----------------"><a href="#-------------------------------API----------------">Документация пользовательского API сервера города.</a></h3><p>Документация пользовательского API сервера города.</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="user" class="panel-title">/user</h3></div><div class="panel-body"><div class="top-resource-description"><p>API пользователя (мобильное приложение).</p></div><div class="panel-group"><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_find"><span class="parent">/user</span>/find</a> <span class="methods"><a href="#user_find_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_find" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_find_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Поиск пользователя (или создание нового) по запрошенному идентификатору устройства. Возвращается информация о профиле пользователя, лента пользователя и информации о категория/подкатегориях.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_find_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/find</h4></div><div class="modal-body"><div class="alert alert-info"><p>Поиск пользователя (или создание нового) по запрошенному идентификатору устройства. Возвращается информация о профиле пользователя, лента пользователя и информации о категория/подкатегориях.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_find_post_request" data-toggle="tab">Request</a></li><li><a href="#user_find_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_find_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор устройства: string, required
+  "id_device": "BF4585465460D",
+  //Тип операционной системы: string, required
+  "os": "anroid",
+  //Версия приложения: string, required
+  "version_app": "version_app",
+  //Токен: string, required
+  "token": "GFDFgfd00D",
+  //Ключ: string, required
+  "key": "12565D565".
+  //Идентификатор города: number, required
+  "id_city": 1
+}
+</code></pre></div><div class="tab-pane" id="user_find_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Профиль пользователя: array
+    "user": {
+      //Идентификатор пользователя: string
+      "id": "bsqF458PDKLSds460HH",
+      //Код цветовой схемы: 1- Красная, 2 - Зеленая: number
+      "color_theme": 2,
+      //Пол: 1 - М, 2 - Ж
+      "sex": 1,
+      //URL адрес картинки пользователя
+      "img": "http://example.com/user.jpg",
+      //Разрешено ли получить уведомления: true - разрешено, false - нет: bool.
+      "push": true,
+      //Разрешена ли вибрация: true - разрешена, false - нет: bool.
+      "vibration": true,
+      //Разрешен ли звук: true - разрешен, false - нет: bool.
+      "sound": true,
+      //Разрешена ли геолокация: true - разрешена, false - нет: bool.
+      "access_geo": true,
+      //Разрешен ли offline: true - разрешен, false - нет: bool.
+      "access_offline": true,
+      //Разрешено ли подгружать изображения: true - разрешено, false - нет: bool.
+      "access_download_image": true
+    },
+    //Категории: array
+    "categories": [
+      {
+        //Идентификатор категории: number
+        "id": 3,
+        //Имя категории: string
+        "name": "Категория 1",
+        //URL адрес иконки категории: string
+        "img": "http:/example.com/icon_category.png",
+        //Подкатегории: array
+        "sub_categories": [
+          {
+            //Идентификатор подкатегории: number
+            "id": 3,
+            //Имя подкатегории: string
+            "name": "Подкатегория 1",
+            //URL адрес иконки подкатегории: string
+            "img": "http:/example.com/icon_sub_category.png"
+          }
+        ]
+      }
+    ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_profile"><span class="parent">/user</span>/profile</a> <span class="methods"><a href="#user_profile_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_profile" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_profile_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Сохранение настроек пользователя</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_profile_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/profile</h4></div><div class="modal-body"><div class="alert alert-info"><p>Сохранение настроек пользователя</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_profile_post_request" data-toggle="tab">Request</a></li><li><a href="#user_profile_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_profile_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 3,
+  //Цветовая схема: 1 - Красная, 2 - Зеленая: number, required
+  "color_theme": 1,
+  //Разрешить получать уведомления: true - разрешить, false - нет: bool, required
+  "push": true,
+  //Разрешить вибрацию: true - разрешить, false - нет: bool, required
+  "vibration": true,
+  //Разрешить звук: true - разрешить, false - нет: bool, required
+  "sound": false,
+  //Разрешить геолокацию: true - разрешить, false - нет: bool, required
+  "access_geo": true
+}
+</code></pre></div><div class="tab-pane" id="user_profile_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Результат проведения операции сохранения настроек пользователя: true - успешна, false - нет: bool
+      "success": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_categories"><span class="parent">/user</span>/categories</a> <span class="methods"><a href="#user_categories_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_categories" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_categories_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение категорий и подкатегорий, отсортированных по рейтингу.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_categories_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/categories</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение категорий и подкатегорий, отсортированных по рейтингу.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_categories_post_request" data-toggle="tab">Request</a></li><li><a href="#user_categories_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_categories_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_categories_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Список категорий: array
+      "categories": [
+          //Идентификатор категории: number
+          "id_category": 3,
+          //Имя категории: string
+          "name": "Бытовая техника",
+          //URL адрес иконки категории: string
+          "img": "http://example.com/icon_category.png",
+          //Список подкатегорий: array
+          "sub_categories": [
+            {
+              //Идентификатор подкатегории: number
+              "id": 3,
+              //Имя подкатегории: string
+              "name": "Холодильники",
+              //URL адрес иконки подкатегории: string
+              "img": "http://example.com/icon_sub_category.png",
+            }
+          ]
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_category_click"><span class="parent">/user/category</span>/click</a> <span class="methods"><a href="#user_category_click_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_category_click" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_category_click_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Совершение клика по категории, повышение рейтинга категории.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_category_click_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/category</span>/click</h4></div><div class="modal-body"><div class="alert alert-info"><p>Совершение клика по категории, повышение рейтинга категории.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_category_click_post_request" data-toggle="tab">Request</a></li><li><a href="#user_category_click_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_category_click_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор категории: number, required
+  "id_category": 3,
+  //Идентификатор города: number, required
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_category_click_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Результат отправки клика: true - отправка совершена, false - нет: bool
+      "success": true
+    }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_sub_category"><span class="parent">/user</span>/sub_category</a> <span class="methods"><a href="#user_sub_category_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_sub_category" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_sub_category_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение определенного количества акций определенной сортировки запрашиваемой подкатегории.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_sub_category_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/sub_category</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение определенного количества акций определенной сортировки запрашиваемой подкатегории.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_sub_category_post_request" data-toggle="tab">Request</a></li><li><a href="#user_sub_category_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_sub_category_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор подкатегории: number, required
+  "id_sub_category": 3,
+  //Начальная позиция акций: number, required
+  "start": 3,
+  //Количество акций: number, required
+  "count": 3,
+  //Идентификатор города: number, required
+  "id_city": 3,
+  //Тип сортировки: 1 - по убыванию даты окончания акции, 2 - по убыванию даты начала акции, 3 - по убыванию скидки акции: number, 4 - по возрастанию текущей цены, 5 - по убыванию текущей цены: required
+  "filter_code": 2
+}
+</code></pre></div><div class="tab-pane" id="user_sub_category_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Идентификатор запрашиваемой  подкатегории: number
+      "id_sub_category": 3,
+      //Акции подкатегории: array
+      "events": [
+        {
+          //Идентификатор акции: string
+          "id": "DFDSF5545dDcvS",
+          //Наименование акции: string
+          "name": "Акция 1",
+          //Текущая цена: number
+          "current_price": 4544,
+          //Копейки текущей цены: number,
+          "current_price_dime": 10,
+          //Старая цена: number
+          "old_price": 5621,
+          //Копейки старой цены: number,
+          "old_price_dime": 10,
+          //Скидка: number
+          "discount": 25,
+          //Время начала акции: date
+          "data_start": "...",
+          //Время конца акции: date
+          "data_finish": "...",
+          //URL адрес главной картинки акции: string
+          "img": "http://example.com/img_event.jpg"
+        }
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_sub_category_clients"><span class="parent">/user/sub_category</span>/clients</a> <span class="methods"><a href="#user_sub_category_clients_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_sub_category_clients" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_sub_category_clients_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение определенного количества клиентов запрашиваемой подкатегории.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_sub_category_clients_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/sub_category</span>/clients</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение определенного количества клиентов запрашиваемой подкатегории.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_sub_category_clients_post_request" data-toggle="tab">Request</a></li><li><a href="#user_sub_category_clients_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_sub_category_clients_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор подкатегории: number, required
+  "id_sub_category": 3,
+  //Идентификатор города: number, required
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_sub_category_clients_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Идентификатор запрашиваемой  подкатегории: number
+      "id_sub_category": 3,
+      //Клиенты, отсортированные по имени, текущей подкатегории: array
+      "clients": [
+        {
+          //Идентификатор клиента: string
+          "id": "GFGDF64A54f",
+          //Имя клиента: string
+          "name": "Магазин 1",
+          //URL картинка клиента: string
+          "img": "http://example.com/client.jpg",
+          //Количество акций у клиента: number
+          "count_events": 4,
+          //Подписан ли пользователь на данного клиента: true - подписан, false - нет: bool
+          "isSubscribe": true
+        }
+      ]
+    }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_sub_category_click"><span class="parent">/user/sub_category</span>/click</a> <span class="methods"><a href="#user_sub_category_click_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_sub_category_click" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_sub_category_click_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Совершение клика по подкатегории, повышение рейтинга подкатегории.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_sub_category_click_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/sub_category</span>/click</h4></div><div class="modal-body"><div class="alert alert-info"><p>Совершение клика по подкатегории, повышение рейтинга подкатегории.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_sub_category_click_post_request" data-toggle="tab">Request</a></li><li><a href="#user_sub_category_click_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_sub_category_click_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор подкатегории: number, required
+  "id_sub_category": 3,
+  //Идентификатор города: number, required
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_sub_category_click_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Результат отправки клика: true - отправка совершена, false - нет: bool
+      "success": true
+    }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_lenta"><span class="parent">/user</span>/lenta</a> <span class="methods"><a href="#user_lenta_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_lenta" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_lenta_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение ленты (списка акций клиентов, на которых подписан пользователь) определенной сортировки.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_lenta_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/lenta</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение ленты (списка акций клиентов, на которых подписан пользователь) определенной сортировки.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_lenta_post_request" data-toggle="tab">Request</a></li><li><a href="#user_lenta_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_lenta_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Начальная позиция акций: number, required
+  "start": 3,
+  //Количество акций: number, required
+  "count": 3,
+  //Идентификатор города: number, required
+  "id_city": 3,
+  //Тип сортировки: 1 - по убыванию даты окончания акции, 2 - по убыванию даты начала акции, 3 - по убыванию скидки акции: number, 4 - по возрастанию текущей цены, 5 - по убыванию текущей цены: required
+  filter_code: 2
+}
+</code></pre></div><div class="tab-pane" id="user_lenta_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Акции: array
+      "events": [
+        {
+          //Идентификатор акции: string
+          "id": "DFDSF5545dDcvS",
+          //Наименование акции: string
+          "name": "Акция 1",
+          //Текущая цена: number
+          "current_price": 4544,
+          //Копейки текущей цены: number,
+          "current_price_dime": 10,
+          //Старая цена: number
+          "old_price": 5621,
+          //Копейки старой цены: number,
+          "old_price_dime": 10,
+          //Скидка: number
+          "discount": 25,
+          //Время начала акции: date
+          "data_start": "...",
+          //Время конца акции: date
+          "data_finish": "...",
+          //URL адрес главной картинки акции: string
+          "img": "http://example.com/img_event.jpg"
+        }
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_event"><span class="parent">/user</span>/event</a> <span class="methods"><a href="#user_event_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_event" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_event_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение информации об акции.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_event_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/event</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение информации об акции.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_event_post_request" data-toggle="tab">Request</a></li><li><a href="#user_event_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_event_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор акции: string, required
+  "id_event": "DFFG4fG44DD",
+  //Идентификатор города: number, required
+  "id_city": 1
+}
+</code></pre></div><div class="tab-pane" id="user_event_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Акция: object
+      "event": {
+        //Идентификатор владельца (клиента) акции: string
+        "id_client": "DEfsdfsxfbnbgfn56gh",
+        //Имя клиента: string,
+        "name_client": "Автомир",
+        //URL картинки клиента: string
+        "img_client": "http://www.example.com/clients/client.png",
+        //Количество акций у клиента: number
+        count_events: 4,
+        //Наименование акции: string
+        "name": "Акция 1",
+        //Описание акции: string
+        "description": "Описание",
+        //Текущая цена: number
+        "current_price": 4544,
+        //Копейки текущей цены: number,
+        "current_price_dime": 10,
+        //Старая цена: number
+        "old_price": 5621,
+        //Копейки старой цены: number,
+        "old_price_dime": 10,
+        //Скидка: number
+        "discount": 25,
+        //Время начала акции: date
+        "data_start": "...",
+        //Время конца акции: date
+        "data_finish": "...",
+        //Точки действия акции: array
+        "places": [
+          {
+            //Идентификатор точки: string
+            "id": "sdfdsSDFS557",
+            //Имя точки: string
+            "name": "Точка 1",
+            //Долгота точки: number
+            "longitude": 55.12,
+            //Широта точки: number
+            "latitude": 444.21,
+            //Номер телефона: string,
+            "phone": "+7 922 667 6666",
+            //График работы: string,
+            "time": "пн. - пт. с 10-00 до 20-00"
+          }
+        ],
+        //URL адрес главной картинки акции: string
+        "img": "http://example.com/img_event.jpg",
+        //URL адреса дополнительных картинок, не включая главную: array
+        "images": ["http://example.com/img_event2.jpg", "http://example.com/img_event3.jpg"],
+        //Условия проведения акции: string
+        "rights": "Условия проведения акции 1",
+        //Условия лайка акции пользователем: true - акция лайкнута, false - акция не лайкнута: bool
+        "like": true,
+        //Ознакамливался ли пользователь с условиями акции: true - пользователь уже ознакамливался с условиями акции, false - нет: bool
+        "isAccess": true,
+      }
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_event_like"><span class="parent">/user/event</span>/like</a> <span class="methods"><a href="#user_event_like_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_event_like" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_event_like_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Лайк/дизлайк акции.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_event_like_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/event</span>/like</h4></div><div class="modal-body"><div class="alert alert-info"><p>Лайк/дизлайк акции.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_event_like_post_request" data-toggle="tab">Request</a></li><li><a href="#user_event_like_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_event_like_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор акции: number, required
+  "id_event": "DFFG4fG44DD",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Флаг, указывающий операцию: true - акция лайкнута, false - акция дизлайкнута: bool
+  "like": true
+}
+</code></pre></div><div class="tab-pane" id="user_event_like_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат проведения операции лайка/дизлайка: true - операция прошла успешно, false - нет: bool
+    "success": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_clients"><span class="parent">/user</span>/clients</a> <span class="methods"><a href="#user_clients_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_clients" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_clients_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение всех клиентов города.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_clients_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/clients</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение всех клиентов города.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_clients_post_request" data-toggle="tab">Request</a></li><li><a href="#user_clients_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_clients_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1
+}
+</code></pre></div><div class="tab-pane" id="user_clients_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Все клиенты города, отсортированные по имени: array
+    "clients": [
+      {
+        //Идентификатор клиента: string
+        "id": "GFGDF64A54f",
+        //Имя клиента: string
+        "name": "Магазин 1",
+        //URL картинка клиента: string
+        "img": "http://example.com/client.jpg",
+        //Количество акций у клиента: number
+        "count_events": 4,
+        //Подписан ли пользователь на данного клиента: true - подписан, false - нет: bool
+        "isSubscribe": true
+      }
+    ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_client"><span class="parent">/user</span>/client</a> <span class="methods"><a href="#user_client_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_client" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_client_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение информации о клиенте.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_client_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/client</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение информации о клиенте.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_client_post_request" data-toggle="tab">Request</a></li><li><a href="#user_client_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_client_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор клиента: string, required
+  "id_client": "DFSDF556VDSasS",
+  //Идентификатор города: number, required
+  "id_city": 1
+}
+</code></pre></div><div class="tab-pane" id="user_client_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Идентификатор клиента: string
+      "id": "GFGDF64A54f",
+      //Имя клиента: string
+      "name": "Магазин 1",
+      //Точки клиента: array
+      "places": [
+        {
+          //Идентификатор точки: string
+          "id": "sdfdsSDFS557",
+          //Имя точки: string
+          "name": "Новая точка 1",
+          //Долгота точки: number
+          "longitude": 55.12,
+          //Широта точки: number
+          "latitude": 444.21
+        }
+      ],
+      //URL картинки клиента: string
+      "img": "http://example.com/client.jpg",
+      //Подписан ли пользователь на данного клиента: true - подписан, false - нет: bool
+      "isSubscribe": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_client_events"><span class="parent">/user/client</span>/events</a> <span class="methods"><a href="#user_client_events_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_client_events" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_client_events_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение определенного количества акций клиента определенной сортировки.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_client_events_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/client</span>/events</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение определенного количества акций клиента определенной сортировки.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_client_events_post_request" data-toggle="tab">Request</a></li><li><a href="#user_client_events_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_client_events_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор клиента: string, required
+  "id_client": "DFSDF556VDSasS",
+  //Начальная позиция акций: number, required
+  "start": 3,
+  //Количество акций: number, required
+  "count": 3,
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Тип сортировки: 1 - по убыванию даты окончания акции, 2 - по убыванию даты начала акции, 3 - по убыванию скидки акции: number, 4 - по возрастанию текущей цены, 5 - по убыванию текущей цены: required
+  filter_code: 2
+}
+</code></pre></div><div class="tab-pane" id="user_client_events_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Акции клиента: array
+      "events": [
+        {
+          //Идентификатор акции: string
+          "id": "DFDSF5545dDcvS",
+          //Текущая цена: number
+          "current_price": 4544,
+          //Копейки текущей цены: number,
+          "current_price_dime": 10,
+          //Старая цена: number
+          "old_price": 5621,
+          //Копейки старой цены: number,
+          "old_price_dime": 10,
+          //Скидка: number
+          "discount": 25,
+          //Время начала акции: date
+          "data_start": "...",
+          //Время конца акции: date
+          "data_finish": "...",
+          //URL адрес главной картинки акции: string
+          "img": "http://example.com/img_event.jpg"
+        }
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_subscribe"><span class="parent">/user</span>/subscribe</a> <span class="methods"><a href="#user_subscribe_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_subscribe" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_subscribe_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Подписка/отписка на клиента.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_subscribe_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/subscribe</h4></div><div class="modal-body"><div class="alert alert-info"><p>Подписка/отписка на клиента.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_subscribe_post_request" data-toggle="tab">Request</a></li><li><a href="#user_subscribe_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_subscribe_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор клиента: string, required
+  "id_client": "DKWPDKg54DDS",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Флаг, указывающий операцию: true - пользователь подписался на клиента, false - пользователь отписался от клиента: bool
+  "subscribe": true
+}
+</code></pre></div><div class="tab-pane" id="user_subscribe_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат: bool
+    "success": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_subscribe_clients"><span class="parent">/user/subscribe</span>/clients</a> <span class="methods"><a href="#user_subscribe_clients_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_subscribe_clients" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_subscribe_clients_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение клиентов, на которых подписан пользователь.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_subscribe_clients_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/subscribe</span>/clients</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение клиентов, на которых подписан пользователь.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_subscribe_clients_post_request" data-toggle="tab">Request</a></li><li><a href="#user_subscribe_clients_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_subscribe_clients_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_subscribe_clients_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Клиенты, отсортированные по имени, текущей подкатегории: array
+    "clients": [
+      {
+        //Идентификатор клиента: string
+        "id": "GFGDF64A54f",
+        //Имя клиента: string
+        "name": "Магазин 1",
+        //URL картинка клиента: string
+        "img": "http://example.com/client.jpg",
+        //Количество акций у клиента: number
+        "count_events": 4,
+        //Абсолютный флаг true, означающий, что пользователь подписан на клиента: bool
+        "isSubscribe": true
+      }
+    ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_dream"><span class="parent">/user</span>/dream</a> <span class="methods"><a href="#user_dream_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_dream" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_dream_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение понравившихся акций, отсортированных по дате, включая неактивные.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_dream_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/dream</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение понравившихся акций, отсортированных по дате, включая неактивные.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_dream_post_request" data-toggle="tab">Request</a></li><li><a href="#user_dream_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_dream_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Начальная позиция акций: number, required
+  "start": 1,
+  //Количество акций: number, required
+  "count": 10
+}
+</code></pre></div><div class="tab-pane" id="user_dream_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Акции: array
+      "events": [
+        {
+          //Идентификатор акции: string
+          "id": "DFDSF5545dDcvS",
+          //Наименование акции: string
+          "name": "Акция 1",
+          //Текущая цена: number
+          "current_price": 4544,
+          //Копейки текущей цены: number,
+          "current_price_dime": 10,
+          //Старая цена: number
+          "old_price": 5621,
+          //Копейки старой цены: number,
+          "old_price_dime": 10,
+          //Скидка: number
+          "discount": 25,
+          //Время начала акции: date
+          "data_start": "...",
+          //Время конца акции: date
+          "data_finish": "...",
+          //URL адрес главной картинки акции: string
+          "img": "http://example.com/img_event.jpg"
+        }
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_hits"><span class="parent">/user</span>/hits</a> <span class="methods"><a href="#user_hits_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_hits" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_hits_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение хитов: какое-то количество акций, отсортированных по убыванию количества просмотров. Максимальное число акций равняется 50.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_hits_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/hits</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение хитов: какое-то количество акций, отсортированных по убыванию количества просмотров. Максимальное число акций равняется 50.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_hits_post_request" data-toggle="tab">Request</a></li><li><a href="#user_hits_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_hits_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_hits_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Акции: array
+      "events": [
+        {
+          //Идентификатор акции: string
+          "id": "DFDSF5545dDcvS",
+          //Наименование акции: string
+          "name": "Акция 1",
+          //Текущая цена: number
+          "current_price": 4544,
+          //Копейки текущей цены: number,
+          "current_price_dime": 10,
+          //Старая цена: number
+          "old_price": 5621,
+          //Копейки старой цены: number,
+          "old_price_dime": 10,
+          //Скидка: number
+          "discount": 25,
+          //Время начала акции: date
+          "data_start": "...",
+          //Время конца акции: date
+          "data_finish": "...",
+          //URL адрес главной картинки акции: string
+          "img": "http://example.com/img_event.jpg"
+        }
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_fire_events"><span class="parent">/user</span>/fire_events</a> <span class="methods"><a href="#user_fire_events_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_fire_events" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_fire_events_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение горящих акций: акции, срок которых истекает завтра (послезавтра).</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_fire_events_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/fire_events</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение горящих акций: акции, срок которых истекает завтра (послезавтра).</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_fire_events_post_request" data-toggle="tab">Request</a></li><li><a href="#user_fire_events_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_fire_events_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_fire_events_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Акции: array
+      "events": [
+        {
+          //Идентификатор акции: string
+          "id": "DFDSF5545dDcvS",
+          //Наименование акции: string
+          "name": "Акция 1",
+          //Текущая цена: number
+          "current_price": 4544,
+          //Копейки текущей цены: number,
+          "current_price_dime": 10,
+          //Старая цена: number
+          "old_price": 5621,
+          //Копейки старой цены: number,
+          "old_price_dime": 10,
+          //Скидка: number
+          "discount": 25,
+          //Время начала акции: date
+          "data_start": "...",
+          //Время конца акции: date
+          "data_finish": "...",
+          //URL адрес главной картинки акции: string
+          "img": "http://example.com/img_event.jpg"
+        }
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_carousel"><span class="parent">/user</span>/carousel</a> <span class="methods"><a href="#user_carousel_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_carousel" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_carousel_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Получение акций, находящихся в карусеел.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_carousel_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/carousel</h4></div><div class="modal-body"><div class="alert alert-info"><p>Получение акций, находящихся в карусеел.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_carousel_post_request" data-toggle="tab">Request</a></li><li><a href="#user_carousel_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_carousel_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number
+  "id_city": 3
+}
+</code></pre></div><div class="tab-pane" id="user_carousel_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+      //Акции: array
+      "events": [
+        {
+          //Идентификатор акции: string
+          "id": "DFDSF5545dDcvS",
+          //URL адрес банера: string
+          "img_baner": "/baners/event_baner.png",
+          //Существует ли ссылка: true - ссылка существует, false - ссылки не существует (пустая ссылка): bool
+          enableLink: true
+          //Ссылка на какую-либо информацию в интернете: string
+          "link": "http://example.com/information"
+        }
+      ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_carousel_click"><span class="parent">/user/carousel</span>/click</a> <span class="methods"><a href="#user_carousel_click_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_carousel_click" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_carousel_click_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Отработка клика по акции, находящейся в каруселе.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_carousel_click_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/carousel</span>/click</h4></div><div class="modal-body"><div class="alert alert-info"><p>Отработка клика по акции, находящейся в каруселе.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_carousel_click_post_request" data-toggle="tab">Request</a></li><li><a href="#user_carousel_click_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_carousel_click_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор акции: string, required
+  "id_event": "DFSAAS545DDFD"
+  //Идентификатор города: number, required
+  "id_city": 1
+}
+</code></pre></div><div class="tab-pane" id="user_carousel_click_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат: true - операция выполнена успешно, false - неуспешно: bool
+    "success": "true"
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_push_click"><span class="parent">/user/push</span>/click</a> <span class="methods"><a href="#user_push_click_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_push_click" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_push_click_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Отработка клика по акции при переходе по push-уведомлению.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_push_click_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user/push</span>/click</h4></div><div class="modal-body"><div class="alert alert-info"><p>Отработка клика по акции при переходе по push-уведомлению.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_push_click_post_request" data-toggle="tab">Request</a></li><li><a href="#user_push_click_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_push_click_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор акции: string, required
+  "id_event": "DFSAAS545DDFD"
+  //Идентификатор города: number, required
+  "id_city": 1
+}
+</code></pre></div><div class="tab-pane" id="user_push_click_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат: true - операция выполнена успешно, false - неуспешно: bool
+    "success": "true"
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_version"><span class="parent">/user</span>/version</a> <span class="methods"><a href="#user_version_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_version" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_version_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Определение версии приложения у пользователя.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_version_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/version</h4></div><div class="modal-body"><div class="alert alert-info"><p>Определение версии приложения у пользователя.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_version_post_request" data-toggle="tab">Request</a></li><li><a href="#user_version_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_version_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Тип операционной системы приложения: string, required
+  "os": "android",
+  //Версия приложения: string, required
+  "version_app": "1.0.0.0"
+}
+</code></pre></div><div class="tab-pane" id="user_version_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат проверки версии приложения: true - приложение поддерживается, false - нет: bool
+    "succces": true,
+    //Текущая версия приложения: string
+    "version_app": "1.0.0.0"
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_report"><span class="parent">/user</span>/report</a> <span class="methods"><a href="#user_report_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_report" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_report_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Отправка оценки приложения пользователем.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_report_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/report</h4></div><div class="modal-body"><div class="alert alert-info"><p>Отправка оценки приложения пользователем.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_report_post_request" data-toggle="tab">Request</a></li><li><a href="#user_report_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_report_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Оценка приложения пользователем от 1 до 5: number, required
+  "star": 5,
+  //Тип операционной системы приложения: string, required
+  "os": "android",
+  //Версия приложения: string, required
+  "version_app": "1.0.0.0",
+  //Причина низкой оценки: string, required
+  "description": "Приложение весит 100 mb"
+}
+</code></pre></div><div class="tab-pane" id="user_report_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат отправки оценки: true - оценка отправлена, false - нет: bool
+    "succces": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_feedback"><span class="parent">/user</span>/feedback</a> <span class="methods"><a href="#user_feedback_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_feedback" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_feedback_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Отправка обратной связи пользователем.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_feedback_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/feedback</h4></div><div class="modal-body"><div class="alert alert-info"><p>Отправка обратной связи пользователем.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_feedback_post_request" data-toggle="tab">Request</a></li><li><a href="#user_feedback_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_feedback_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Тип обратной связи: 1 - Ошибка в приложении, 2 - Неверные условия акции, 3 - Другое: number, required
+  "type": 1,
+  //Содержание обратной связи (описание): string, required
+  "description": "Нету категории: часы"
+}
+</code></pre></div><div class="tab-pane" id="user_feedback_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат успешности отправки обратной связи: true - обратная связь отправлена, false - нет: bool
+    "succces": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_search"><span class="parent">/user</span>/search</a> <span class="methods"><a href="#user_search_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_search" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_search_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Поиск акций по ключевой фразе.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_search_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/search</h4></div><div class="modal-body"><div class="alert alert-info"><p>Поиск акций по ключевой фразе.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_search_post_request" data-toggle="tab">Request</a></li><li><a href="#user_search_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_search_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Ключевая фраза для поиска: string, required
+  "key_word": "ботинки"
+}
+</code></pre></div><div class="tab-pane" id="user_search_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Акции: array
+    "events": [
+      {
+        //Идентификатор акции: string
+        "id": "DFDSF5545dDcvS",
+        //Наименование акции: string
+        "name": "Акция 1",
+        //Текущая цена: number
+        //Текущая цена: number
+        "current_price": 4544,
+        //Копейки текущей цены: number,
+        "current_price_dime": 10,
+        //Старая цена: number
+        "old_price": 5621,
+        //Копейки старой цены: number,
+        "old_price_dime": 10,
+        //Скидка: number
+        "discount": 25,
+        //Время начала акции: date
+        "data_start": "...",
+        //Время конца акции: date
+        "data_finish": "...",
+        //URL адрес главной картинки акции: string
+        "img": "http://example.com/img_event.jpg"
+      }
+    ]
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_access_event"><span class="parent">/user</span>/access_event</a> <span class="methods"><a href="#user_access_event_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_access_event" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_access_event_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Отправка ознакомления пользователя с условиями проведения акции.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_access_event_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/access_event</h4></div><div class="modal-body"><div class="alert alert-info"><p>Отправка ознакомления пользователя с условиями проведения акции.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_access_event_post_request" data-toggle="tab">Request</a></li><li><a href="#user_access_event_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_access_event_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор акции: string
+  "id_event": "DGSFDSSS",
+  //Идентификатор города: number
+  "id_city": 1
+}
+</code></pre></div><div class="tab-pane" id="user_access_event_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат обработки отправки ознакомления с условиями: true - отправка успешна, false - пользователь уже когда-то ознакамливался с условиями акции: bool
+    "success": "true"
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_update_category"><span class="parent">/user</span>/update_category</a> <span class="methods"><a href="#user_update_category_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_update_category" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_update_category_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Проверка на условие обновления категорий.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_update_category_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/update_category</h4></div><div class="modal-body"><div class="alert alert-info"><p>Проверка на условие обновления категорий.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_update_category_post_request" data-toggle="tab">Request</a></li><li><a href="#user_update_category_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_update_category_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Идентификатор операции: 1 - получить результат проверки на обновление категорий, 2 - уведомить, что категории обновлены: number, required
+  "isGet": 1
+}
+</code></pre></div><div class="tab-pane" id="user_update_category_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат проверки на обновление категорий: bool
+    //Если "isGet" = 1, то ,если "success" = true, то обновить категории нужно, иначе, если "success" = false, то обновлять категории не надо.
+    //Если "isGet" = 2, то если "success" = true, флаг удачно снят, иначе, если "success" = false, то произошла непредвиденная ошибка.
+    "succces": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div><div class="panel panel-white"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_token"><span class="parent">/user</span>/token</a> <span class="methods"><a href="#user_token_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user_token" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_token_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Обновление токена.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_token_post"><div class="modal-dialog" style="width: 1100px"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/token</h4></div><div class="modal-body"><div class="alert alert-info"><p>Обновление токена.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_token_post_request" data-toggle="tab">Request</a></li><li><a href="#user_token_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_token_post_request"><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  //Идентификатор пользователя: string, required
+  "id": "BF4585465460D",
+  //Идентификатор города: number, required
+  "id_city": 1,
+  //Токен: string, required
+  "token": "DSDFSDFdfdvddsfas"
+}
+</code></pre></div><div class="tab-pane" id="user_token_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><p>Успешное выполнение запроса.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "response": {
+    //Результат успеха отправки токена: true - отправка прошла успешно, false - нет: bool
+    "succces": true
+  }
+}
+</code></pre><h2>HTTP status code <a href="http://httpstatus.es/404" target="_blank">404</a></h2><p>Выполнение запроса прошло с ошибкой. Коды ошибок: (10): Произошла ошибка сервера. (20): Отправлены некорректные данные. (30): Данные не найдены.</p><h3>Body</h3><p><strong>Type: application/json</strong></p><p><strong>Example</strong>:</p><pre><code>{
+  "error": {
+    //Код ошибки: number
+    "code": 20,
+    //Сообщение ошибки: string
+    "message": "Отправлены некорректные данные."
+    }
+}
+</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#user">/user</a></li></ul></div></div></div></div></body></html>

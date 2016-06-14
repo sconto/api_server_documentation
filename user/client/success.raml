@@ -1,0 +1,29 @@
+description: Успешное выполнение запроса.
+body:
+  application/json:
+    example: |
+      {
+        "response": {
+            //Идентификатор клиента: string
+            "id": "GFGDF64A54f",
+            //Имя клиента: string
+            "name": "Магазин 1",
+            //Точки клиента: array
+            "places": [
+              {
+                //Идентификатор точки: string
+                "id": "sdfdsSDFS557",
+                //Имя точки: string
+                "name": "Новая точка 1",
+                //Долгота точки: number
+                "longitude": 55.12,
+                //Широта точки: number
+                "latitude": 444.21
+              }
+            ],
+            //URL картинки клиента: string
+            "img": "http://example.com/client.jpg",
+            //Подписан ли пользователь на данного клиента: true - подписан, false - нет: bool
+            "isSubscribe": true
+        }
+      }

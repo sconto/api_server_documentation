@@ -1,0 +1,35 @@
+description: Успешное выполнение запроса.
+body:
+  application/json:
+    example: |
+      {
+        "response": {
+            //Идентификатор запрашиваемой  подкатегории: number
+            "id_sub_category": 3,
+            //Акции подкатегории: array
+            "events": [
+              {
+                //Идентификатор акции: string
+                "id": "DFDSF5545dDcvS",
+                //Наименование акции: string
+                "name": "Акция 1",
+                //Текущая цена: number
+                "current_price": 4544,
+                //Копейки текущей цены: number,
+                "current_price_dime": 10,
+                //Старая цена: number
+                "old_price": 5621,
+                //Копейки старой цены: number,
+                "old_price_dime": 10,
+                //Скидка: number
+                "discount": 25,
+                //Время начала акции: date
+                "data_start": "...",
+                //Время конца акции: date
+                "data_finish": "...",
+                //URL адрес главной картинки акции: string
+                "img": "http://example.com/img_event.jpg"
+              }
+            ]
+        }
+      }

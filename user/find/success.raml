@@ -1,0 +1,53 @@
+description: Успешное выполнение запроса.
+body:
+  application/json:
+    example: |
+      {
+        "response": {
+          //Профиль пользователя: array
+          "user": {
+            //Идентификатор пользователя: string
+            "id": "bsqF458PDKLSds460HH",
+            //Код цветовой схемы: 1- Красная, 2 - Зеленая: number
+            "color_theme": 2,
+            //Пол: 1 - М, 2 - Ж
+            "sex": 1,
+            //URL адрес картинки пользователя
+            "img": "http://example.com/user.jpg",
+            //Разрешено ли получить уведомления: true - разрешено, false - нет: bool.
+            "push": true,
+            //Разрешена ли вибрация: true - разрешена, false - нет: bool.
+            "vibration": true,
+            //Разрешен ли звук: true - разрешен, false - нет: bool.
+            "sound": true,
+            //Разрешена ли геолокация: true - разрешена, false - нет: bool.
+            "access_geo": true,
+            //Разрешен ли offline: true - разрешен, false - нет: bool.
+            "access_offline": true,
+            //Разрешено ли подгружать изображения: true - разрешено, false - нет: bool.
+            "access_download_image": true
+          },
+          //Категории: array
+          "categories": [
+            {
+              //Идентификатор категории: number
+              "id": 3,
+              //Имя категории: string
+              "name": "Категория 1",
+              //URL адрес иконки категории: string
+              "img": "http:/example.com/icon_category.png",
+              //Подкатегории: array
+              "sub_categories": [
+                {
+                  //Идентификатор подкатегории: number
+                  "id": 3,
+                  //Имя подкатегории: string
+                  "name": "Подкатегория 1",
+                  //URL адрес иконки подкатегории: string
+                  "img": "http:/example.com/icon_sub_category.png"
+                }
+              ]
+            }
+          ]
+        }
+      }

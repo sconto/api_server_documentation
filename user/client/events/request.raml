@@ -1,0 +1,16 @@
+application/json:
+  example: |
+    {
+      //Идентификатор пользователя: string, required
+      "id": "BF4585465460D",
+      //Идентификатор клиента: string, required
+      "id_client": "DFSDF556VDSasS",
+      //Начальная позиция акций: number, required
+      "start": 3,
+      //Количество акций: number, required
+      "count": 3,
+      //Идентификатор города: number, required
+      "id_city": 1,
+      //Тип сортировки: 1 - по убыванию даты окончания акции, 2 - по убыванию даты начала акции, 3 - по убыванию скидки акции: number, 4 - по возрастанию текущей цены, 5 - по убыванию текущей цены: required
+      filter_code: 2
+    }

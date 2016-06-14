@@ -1,0 +1,21 @@
+description: Успешное выполнение запроса.
+body:
+  application/json:
+    example: |
+      {
+        "response": {
+            //Акции: array
+            "events": [
+              {
+                //Идентификатор акции: string
+                "id": "DFDSF5545dDcvS",
+                //URL адрес банера: string
+                "img_baner": "/baners/event_baner.png",
+                //Существует ли ссылка: true - ссылка существует, false - ссылки не существует (пустая ссылка): bool
+                enableLink: true
+                //Ссылка на какую-либо информацию в интернете: string
+                "link": "http://example.com/information"
+              }
+            ]
+        }
+      }
